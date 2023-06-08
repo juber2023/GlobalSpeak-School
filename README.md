@@ -1,4 +1,4 @@
-### Summer Camp/ Foreign Language training centre
+## Summer Camp/ Foreign Language training centre
 * Comprehensive Program Listings: Detailed info on summer camp and language training programs, including descriptions, age groups, dates, duration, and pricing options.
 * Online Registration and Payment: User-friendly system for direct registration and secure online payments for summer camp sessions and language classes.
 * Multilingual Support: Website supports multiple languages, allowing visitors to navigate and access content in their preferred language.

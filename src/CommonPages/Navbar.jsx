@@ -4,6 +4,7 @@ import ActiveLink from "../Hooks/ActiveLink";
 import { useContext } from "react";
 import { UserContext } from "../Auth/ContextApi";
 
+
 const Navbar = () => {
     const {user,logOut,loading}=useContext(UserContext)
     const handleLogOut=()=>{
@@ -68,6 +69,7 @@ const Navbar = () => {
               
             }
             </div>
+            
           </div>
           <div className="md:hidden">
             <button
