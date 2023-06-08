@@ -85,7 +85,7 @@ const Register = () => {
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit(handleRegister)}
         >
-          <p className="text-blue-500 text-2xl text-center font-bold">Register</p>
+          <p className="text-lime-500 text-2xl text-center font-bold">Register</p>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -194,7 +194,7 @@ const Register = () => {
             
             
             <p>
-             Already have an account? Please <Link to='/login' className="font-bold text-sm text-blue-500 hover:text-blue-800">Login</Link>
+             Already have an account? Please <Link to='/login' className="font-bold text-sm text-lime-500 hover:text-lime-800">Login</Link>
             </p>
           
         </form>

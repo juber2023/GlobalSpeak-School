@@ -78,7 +78,7 @@ const Login = () => {
           className="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4"
           onSubmit={handleSubmit(handleLogin)}
         >
-          <p className="text-blue-500 text-2xl text-center font-bold">Login</p>
+          <p className="text-lime-500 text-2xl text-center font-bold">Login</p>
           <div className="mb-4">
             <label
               className="block text-gray-700 text-sm font-bold mb-2"
@@ -132,7 +132,7 @@ const Login = () => {
             </button>
             <p className="text-red-500 font-bold text-2xl"></p>
             <p>
-             New to GlobalSpeak? Please <Link to='/register' className="font-bold text-sm text-blue-500 hover:text-blue-800">Register</Link>
+             New to GlobalSpeak? Please <Link to='/register' className="font-bold text-sm text-lime-500 hover:text-lime-800">Register</Link>
             </p>
         </form>
         <p className='text-center my-3 font-semibold'>or</p>

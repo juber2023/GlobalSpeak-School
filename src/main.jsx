@@ -11,6 +11,9 @@ import Home from './Home/Home';
 import ContextApi from './Auth/ContextApi';
 import Register from './Auth/Register';
 import Login from './Auth/Login';
+import Instructors from './Pages/Instructors';
+import Classes from './Pages/Classes';
+import Dashboard from './Pages/Dashboard';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +32,19 @@ const router = createBrowserRouter([
       {
         path:'/login',
         element:<Login></Login>
+      },
+      {
+        path:'/instructors',
+        element:<Instructors></Instructors>,
+        loader:()=>fetch('http://localhost:5000/instructors')
+      },
+      {
+        path:'/classes',
+        element:<Classes></Classes>
+      },
+      {
+        path:'/dashboard',
+        element:<Dashboard></Dashboard>
       },
     ]
   },

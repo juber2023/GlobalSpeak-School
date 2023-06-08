@@ -13,8 +13,8 @@ const ErrorPage = () => {
         />
       </div>
 
-      <button className=" mt-5 relative inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-blue-500 border border-transparent rounded-md shadow-sm hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500">
-        <span className="absolute animate-ping w-full h-full rounded-md bg-blue-400 opacity-75"></span>
+      <button className=" mt-5 relative inline-flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-lime-500 border border-transparent rounded-md shadow-sm hover:bg-lime-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-lime-500">
+        <span className="absolute animate-ping w-full h-full rounded-md bg-lime-400 opacity-75"></span>
         <Link className="relative" to="/">
           Back to home
         </Link>

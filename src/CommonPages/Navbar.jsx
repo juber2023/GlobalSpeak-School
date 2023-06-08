@@ -6,7 +6,7 @@ import { UserContext } from "../Auth/ContextApi";
 
 
 const Navbar = () => {
-    const {user,logOut,loading}=useContext(UserContext)
+    const {user,logOut,}=useContext(UserContext)
     const handleLogOut=()=>{
       logOut()
       .then(()=>{})
@@ -37,13 +37,13 @@ const Navbar = () => {
               Home
             </ActiveLink>
             <ActiveLink
-              to="/"
+              to="/instructors"
               className="text-white  px-3 py-2 rounded-md text-base font-medium"
             >
               Instructors
             </ActiveLink>
             <ActiveLink
-              to="/"
+              to="/classes"
               className="text-white  px-3 py-2 rounded-md text-base font-medium"
             >
               Classes
@@ -56,7 +56,7 @@ const Navbar = () => {
               user?
               <div className="flex space-x-4 items-center">
                 {/* <ActiveLink to='/addToy'>Add A Toy</ActiveLink> */}
-                <ActiveLink to='/'>Dashboard</ActiveLink>
+                <ActiveLink to='/dashboard'>Dashboard</ActiveLink>
                 <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
                 <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
               </div>
@@ -104,34 +104,34 @@ const Navbar = () => {
             Home
           </ActiveLink>
           <ActiveLink
-            to="/"
+            to="/classes"
             className="text-white block  px-3 py-2"
           >
-            All Toys
+            Classes
           </ActiveLink>
           <ActiveLink
-            to="/"
+            to="/instructors"
             className="text-white block  px-3 py-2"
           >
-            Blogs
+            Instructors
           </ActiveLink>
           
-          {/* {
+          {
               user?
-              <div className="flex flex-col">
-                <ActiveLink to='/addToy'>Add A Toy</ActiveLink>
-                <ActiveLink to='/myToys'>My Toys</ActiveLink>
+              <div className="flex space-x-4 items-center">
+                {/* <ActiveLink to='/addToy'>Add A Toy</ActiveLink> */}
+                <ActiveLink to='/dashboard'>Dashboard</ActiveLink>
                 <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
                 <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
               </div>
               :
-              <div className="flex flex-col">
+              <div className="space-x-4">
                   <ActiveLink to="/register">Register</ActiveLink>
                   <ActiveLink to="/login">Login</ActiveLink>
               </div>
               
               
-            } */}
+            }
           
         </div>
       </div>
