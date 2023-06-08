@@ -1,11 +1,11 @@
-import React from "react";
+
 import { useLoaderData } from "react-router-dom";
 
 const Classes = () => {
   const classes = useLoaderData();
   console.log(classes);
   return (
-    <div className="grid md:grid-cols-3 gap-5">
+    <div className="grid md:grid-cols-3 gap-5 my-3">
       {classes.map((c) => {
         return (
           <div key={c._id} className="card h-[600px] glass">

@@ -199,7 +199,7 @@ const Register = () => {
           
         </form>
         <p className='text-center my-3 font-semibold'>or</p>
-            <div onClick={handleGoogle} className='flex items-center space-x-2 border shadow-lg rounded-2xl p-2 hover:bg-sky-200 cursor-pointer'>
+            <div onClick={handleGoogle} className='flex items-center space-x-2 border shadow-lg rounded-2xl p-2 hover:bg-sky-200 cursor-pointer mb-5'>
             <FcGoogle></FcGoogle>
             <p> Sign in with <span>google</span></p>
             </div>

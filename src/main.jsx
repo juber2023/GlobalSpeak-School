@@ -13,7 +13,10 @@ import Register from './Auth/Register';
 import Login from './Auth/Login';
 import Instructors from './Pages/Instructors';
 import Classes from './Pages/Classes';
-import Dashboard from './Pages/Dashboard';
+import AdminDashBoard from './Pages/AdminDashBoard';
+import InstructorDashboard from './Pages/InstructorDashboard';
+import StudentDashboard from './Pages/StudentDashboard';
+import PersonalRouter from './Auth/PersonalRouter';
 
 const router = createBrowserRouter([
   {
@@ -44,8 +47,16 @@ const router = createBrowserRouter([
         loader:()=>fetch('http://localhost:5000/classes')
       },
       {
-        path:'/dashboard',
-        element:<Dashboard></Dashboard>
+        path:'/admin/dashboard',
+        element:<PersonalRouter><AdminDashBoard></AdminDashBoard></PersonalRouter>
+      },
+      {
+        path:'/instructor/dashboard',
+        element:<PersonalRouter><InstructorDashboard></InstructorDashboard></PersonalRouter>
+      },
+      {
+        path:'/student/dashboard',
+        element:<PersonalRouter><StudentDashboard></StudentDashboard></PersonalRouter>
       },
     ]
   },

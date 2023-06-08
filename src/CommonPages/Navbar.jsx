@@ -55,8 +55,9 @@ const Navbar = () => {
               {
               user?
               <div className="flex space-x-4 items-center">
-                {/* <ActiveLink to='/addToy'>Add A Toy</ActiveLink> */}
-                <ActiveLink to='/dashboard'>Dashboard</ActiveLink>
+                {(user.email === 'ph@2023.com') ? <ActiveLink to='/admin/dashboard'>Dashboard</ActiveLink> : null}
+                {(user.email === 'juber@gmail.com') ? <ActiveLink to='/instructor/dashboard'>Dashboard</ActiveLink> : null}
+                {(user.email !=='juber@gmail.com' && user.email !=='ph@2023.com') ? <ActiveLink to='/student/dashboard'>Dashboard</ActiveLink> : null}
                 <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
                 <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
               </div>
@@ -116,10 +117,10 @@ const Navbar = () => {
             Instructors
           </ActiveLink>
           
-          {
+          {/* {
               user?
               <div className="flex space-x-4 items-center">
-                {/* <ActiveLink to='/addToy'>Add A Toy</ActiveLink> */}
+                
                 <ActiveLink to='/dashboard'>Dashboard</ActiveLink>
                 <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
                 <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
@@ -131,7 +132,7 @@ const Navbar = () => {
               </div>
               
               
-            }
+            } */}
           
         </div>
       </div>

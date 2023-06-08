@@ -65,7 +65,7 @@ const Login = () => {
   };
   return (
 
-        <div className="grid md:grid-cols-2 items-center">
+        <div className="grid md:grid-cols-2 items-center ">
           <div className="hidden md:block " data-aos="fade-down"
      data-aos-easing="linear"
      data-aos-duration="1500">

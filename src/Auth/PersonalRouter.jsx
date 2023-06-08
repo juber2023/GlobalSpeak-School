@@ -1,10 +1,11 @@
 import { useContext } from 'react';
 import { Navigate, useLocation } from 'react-router-dom';
-import { UserIdentity } from './ContextApi';
+
 import Swal from 'sweetalert2';
+import { UserContext } from './ContextApi';
 
 const PersonalRouter = ({children}) => {
-    const {user,loading}=useContext(UserIdentity)
+    const {user,loading}=useContext(UserContext)
     const location=useLocation()
 
     if(loading){
@@ -17,7 +18,7 @@ const PersonalRouter = ({children}) => {
     else{
         Swal.fire({
             icon: 'error',
-            title: 'You have to log in first to view details',
+            title: 'You have to log in first',
           })
     }
     return <>
