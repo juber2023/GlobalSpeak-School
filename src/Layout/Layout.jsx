@@ -19,7 +19,7 @@ const Layout = () => {
                 <p>ading...</p>
             </div>:''}</div>
 
-            <div className='md:w-3/4 mx-auto min-h-[calc(100vh-435px)]'>
+            <div className='md:w-3/4 mx-auto min-h-[calc(100vh-305px)]'>
             <Outlet></Outlet>
             </div>
 

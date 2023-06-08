@@ -1,26 +1,28 @@
 import { Link } from "react-router-dom";
 import img from '../../public/logo.jpg'
 import ActiveLink from "../Hooks/ActiveLink";
+import { useContext } from "react";
+import { UserContext } from "../Auth/ContextApi";
 
 const Navbar = () => {
-    // const {user,logOut,loading}=useContext(UserIdentity)
-    // const handleLogOut=()=>{
-    //   logOut()
-    //   .then(()=>{})
-    //   .catch(error=>{})
-    // }
+    const {user,logOut,loading}=useContext(UserContext)
+    const handleLogOut=()=>{
+      logOut()
+      .then(()=>{})
+      .catch(error=>{})
+    }
 //   console.log(user);
   return (
     <nav className=" text-white bg-gradient-to-r bg-black sticky top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex justify-center items-center gap-3">
-          <img src={img} alt="Action Toys Marketplace" className="h-14 w-14 rounded-full" />
+          <img src={img} alt="logo" className="h-14 w-14 rounded-full" />
             <Link
               to="/"
               className=" font-bold text-2xl"
             >
-            <span className="text-blue-500 text-4xl">G</span>lobal<span className="text-blue-500 text-4xl">S</span>peak
+            <span className="text-lime-500 text-4xl">G</span>lobal<span className="text-lime-500 text-4xl">S</span>peak
                  
             </Link>
             
@@ -49,11 +51,11 @@ const Navbar = () => {
 
           <div className="hidden md:block font-semibold ">
             <div className="space-x-4">
-              {/* {
+              {
               user?
               <div className="flex space-x-4 items-center">
-                <ActiveLink to='/addToy'>Add A Toy</ActiveLink>
-                <ActiveLink to='/myToys'>My Toys</ActiveLink>
+                {/* <ActiveLink to='/addToy'>Add A Toy</ActiveLink> */}
+                <ActiveLink to='/'>Dashboard</ActiveLink>
                 <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
                 <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
               </div>
@@ -64,7 +66,7 @@ const Navbar = () => {
               </div>
               
               
-            } */}
+            }
             </div>
           </div>
           <div className="md:hidden">
