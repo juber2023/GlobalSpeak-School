@@ -1,18 +1,27 @@
 import { Link } from "react-router-dom";
-import img from '../../public/logo.jpg'
+import img from '../../src/assets/logo.jpg'
 import ActiveLink from "../Hooks/ActiveLink";
-import { useContext } from "react";
+import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Auth/ContextApi";
 
 
 const Navbar = () => {
+  // const [allUsers, SetAllUsers] = useState();
+  // useEffect(() => {
+  //   fetch("http://localhost:5000/users")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const instructors = data.filter(d=>d.role==='instructor')
+  //       SetAllUsers(instructors)
+  //     });
+  // }, []);
     const {user,logOut,}=useContext(UserContext)
     const handleLogOut=()=>{
       logOut()
       .then(()=>{})
       .catch(error=>{})
     }
-//   console.log(user);
+  // console.log(allUsers);
   return (
     <nav className=" text-white bg-gradient-to-r bg-black sticky top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -65,10 +74,9 @@ const Navbar = () => {
               <div className="space-x-4">
                   <ActiveLink to="/register">Register</ActiveLink>
                   <ActiveLink to="/login">Login</ActiveLink>
-              </div>
-              
-              
+              </div> 
             }
+
             </div>
             
           </div>
@@ -117,11 +125,12 @@ const Navbar = () => {
             Instructors
           </ActiveLink>
           
-          {/* {
+          {
               user?
               <div className="flex space-x-4 items-center">
-                
-                <ActiveLink to='/dashboard'>Dashboard</ActiveLink>
+                {(user.email === 'ph@2023.com') ? <ActiveLink to='/admin/dashboard'>Dashboard</ActiveLink> : null}
+                {(user.email === 'juber@gmail.com') ? <ActiveLink to='/instructor/dashboard'>Dashboard</ActiveLink> : null}
+                {(user.email !=='juber@gmail.com' && user.email !=='ph@2023.com') ? <ActiveLink to='/student/dashboard'>Dashboard</ActiveLink> : null}
                 <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
                 <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
               </div>
@@ -129,10 +138,8 @@ const Navbar = () => {
               <div className="space-x-4">
                   <ActiveLink to="/register">Register</ActiveLink>
                   <ActiveLink to="/login">Login</ActiveLink>
-              </div>
-              
-              
-            } */}
+              </div> 
+            }
           
         </div>
       </div>
