@@ -1,5 +1,7 @@
 
+import anime from 'animejs/lib/anime.es.js';
 import axios from 'axios';
+import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
 
@@ -59,10 +61,6 @@ const AdminDashboard = () => {
     }
   };
 
-  // const handleFeedbackClick = (classId) => {
-    
-  // };
-
   // modal 
   const handleFeedbackClick = (classItem) => {
     setSelectedClass(classItem);
@@ -77,10 +75,8 @@ const AdminDashboard = () => {
 
   const handleSendFeedback = async () => {
     try {
-      // Send the feedback to the instructor
       const feedback = feedbackText.trim();
       if (feedback) {
-        // You can send the feedback to the instructor using your preferred method (e.g., email, notification, etc.)
         console.log(`Sending feedback to instructor for class ID: ${selectedClass._id}`);
         console.log(`Feedback text: ${feedback}`);
       }
@@ -90,12 +86,27 @@ const AdminDashboard = () => {
     }
   };
 
+
+  // Animate table 
+  const tableRef = useRef(null);
+
+  useEffect(() => {
+    anime({
+      targets: tableRef.current.querySelectorAll('tr'),
+      opacity: [0, 1],
+      translateY: ['1rem', 0],
+      easing: 'easeOutExpo',
+      duration: 2000,
+      delay: anime.stagger(100),
+    });
+  }, []);
+
   return (
     <div className="flex">
       <div className="w-1/6 bg-gray-200 min-h-[calc(100vh-305px)] ">
-        <ul className="py-20 ">
+        <ul className="py-20">
           <li
-            className={`px-2 py-2 cursor-pointer ${
+            className={` py-2 md:pl-10 cursor-pointer ${
               activeItem === 'item1' ? 'bg-lime-500 text-white' : ''
             }`}
             onClick={() => handleItemClick('item1')}
@@ -105,7 +116,7 @@ const AdminDashboard = () => {
 
           </li>
           <li
-            className={`px-2 py-2 cursor-pointer ${
+            className={` py-2 md:pl-10 cursor-pointer ${
               activeItem === 'item2' ? 'bg-lime-500 text-white' : ''
             }`}
             onClick={() => handleItemClick('item2')}
@@ -119,7 +130,7 @@ const AdminDashboard = () => {
       <div className="w-3/4 bg-white p-4">
         {/* classes table  */}
         {activeItem === 'item1' && 
-        <table className="w-full table-auto">
+        <table ref={tableRef} className="w-full table-auto">
         <thead>
           <tr>
             <th className="px-4 py-2">Photo</th>
@@ -143,25 +154,25 @@ const AdminDashboard = () => {
               <td className="px-4 py-2">{classItem.email}</td>
               <td className="px-4 py-2">{classItem.availableSeats}</td>
               <td className="px-4 py-2">${classItem.price}</td>
-              <td className="px-4 py-2">{classItem.type}</td>
+              <td className={`px-4 py-2 ${classItem.type==="Denied" && "text-red-500 font-semibold"} ${classItem.type==="Approved" && "text-green-500 font-semibold"} ${classItem.type==="Pending" && "animate-pulse font-bold"}`} >{classItem.type}</td>
               <td className="px-4 py-2">
                 <button
                   onClick={() => handleApproveClick(classItem._id)}
                   disabled={classItem.type === 'Approved' || classItem.type === 'Denied'}
-                  className="mr-2 bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="mr-2 bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-green-800"
                 >
                   Approve
                 </button>
                 <button
                   onClick={() => handleDenyClick(classItem._id)}
                   disabled={classItem.type === 'Approved' || classItem.type === 'Denied'}
-                  className="mr-2 bg-red-500 text-white px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed"
+                  className="mr-2 bg-red-500 text-white px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-red-900"
                 >
                   Deny
                 </button>
                 <button
                   onClick={() => handleFeedbackClick(classItem._id)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-800"
                 >
                   Send Feedback
                 </button>
@@ -175,7 +186,7 @@ const AdminDashboard = () => {
         <div className="fixed inset-0 flex items-center justify-center z-50">
           <div className="bg-white p-4 rounded shadow-lg">
             <h2 className="text-lg font-semibold mb-2">Send Feedback</h2>
-            <p>Class: {selectedClass?.name}</p>
+            
             <textarea
               value={feedbackText}
               onChange={(e) => setFeedbackText(e.target.value)}

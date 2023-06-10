@@ -26,7 +26,7 @@ const Register = () => {
             console.log(loggedUser);
             updateProfile(loggedUser,{ displayName:data.name, photoURL:data.photoURL})
             .then(() => {
-              const saveUser = { name: data.name, email: data.email }
+              const saveUser = { name: data.name, email: data.email , photo:data.photoURL, role:'Student' }
               fetch('http://localhost:5000/users', {
                   method: 'POST',
                   headers: {
@@ -60,8 +60,8 @@ const Register = () => {
         googleLogIn()
         .then(result => {
           const loggedInUser = result.user;
-          // console.log(loggedInUser);
-          const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email }
+          console.log(loggedInUser);
+          const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role:'Student', photo:loggedInUser.photoURL }
           fetch('http://localhost:5000/users', {
               method: 'POST',
               headers: {
