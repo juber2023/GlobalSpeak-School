@@ -17,6 +17,10 @@ import AdminDashBoard from './Pages/AdminDashBoard';
 import InstructorDashboard from './Pages/InstructorDashboard';
 import StudentDashboard from './Pages/StudentDashboard';
 import PersonalRouter from './Auth/PersonalRouter';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import AdminDashboard from './Pages/AdminDashBoard';
+import DashboardLayout from './Layout/DashboardLayout';
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -46,9 +50,17 @@ const router = createBrowserRouter([
         element:<Classes></Classes>,
         loader:()=>fetch('http://localhost:5000/classes')
       },
+    ]
+  },
+  {
+    path:'/',
+    element: <DashboardLayout></DashboardLayout>,
+    errorElement:<ErrorPage></ErrorPage>,
+    children:[
       {
         path:'/admin/dashboard',
-        element:<PersonalRouter><AdminDashBoard></AdminDashBoard></PersonalRouter>
+        element:<PersonalRouter><AdminDashBoard></AdminDashBoard></PersonalRouter>,
+        loader:()=>fetch('http://localhost:5000/classes')
       },
       {
         path:'/instructor/dashboard',
@@ -59,13 +71,16 @@ const router = createBrowserRouter([
         element:<PersonalRouter><StudentDashboard></StudentDashboard></PersonalRouter>
       },
     ]
-  },
+  }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ContextApi>
+      <QueryClientProvider client={queryClient}>
     <RouterProvider router={router} />
+      </QueryClientProvider>
     </ContextApi>
   </React.StrictMode>,
 )
