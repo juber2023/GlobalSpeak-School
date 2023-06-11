@@ -10,8 +10,7 @@ const PopularClasses = () => {
         SetPC(topPC);
       });
   }, []);
-  //   const topPC = PC.slice(0, 6);
-  console.log(PC);
+  
 
   return (
     <div className="my-5">
@@ -21,7 +20,7 @@ const PopularClasses = () => {
       <div className="grid md:grid-cols-3 gap-5">
       {PC.map((p) => {
         return (
-          <div key={p._id} className="card glass h-[550px]">
+          <div key={p._id} className="card glass h-[550px] hover:scale-110 duration-150">
             <figure>
               <img
                 src={p.image}

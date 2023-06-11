@@ -1,48 +1,53 @@
-import { Link } from "react-router-dom";
-import img from '../../src/assets/logo.jpg'
+import { Link, useLocation, useParams } from "react-router-dom";
+import img from "../../src/assets/logo.jpg";
 import ActiveLink from "../Hooks/ActiveLink";
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../Auth/ContextApi";
 
-
 const Navbar = () => {
-  // const [allUsers, SetAllUsers] = useState();
-  // useEffect(() => {
-  //   fetch("http://localhost:5000/users")
-  //     .then((res) => res.json())
-  //     .then((data) => {
-  //       const instructors = data.filter(d=>d.role==='instructor')
-  //       SetAllUsers(instructors)
-  //     });
-  // }, []);
-    const {user,logOut,}=useContext(UserContext)
-    const handleLogOut=()=>{
-      logOut()
-      .then(()=>{})
-      .catch(error=>{})
+  const { user, logOut } = useContext(UserContext);
+  const handleLogOut = () => {
+    logOut()
+      .then(() => {})
+      .catch((error) => {});
+  };
+
+  // dashboard
+  const [allUsers, SetAllUsers] = useState([]);
+  useEffect(() => {
+    fetch("http://localhost:5000/users")
+      .then((res) => res.json())
+      .then((data) => {
+        SetAllUsers(data);
+      });
+  }, []);
+
+  const findUserRole = () => {
+    const loggedUser = allUsers.find((u) => u.email === user?.email);
+
+    if (loggedUser) {
+      return loggedUser.role;
+    } else {
+      return "No user found";
     }
-  // console.log(allUsers);
+  };
+
+  const userRole = findUserRole(user?.email);
+
   return (
     <nav className=" text-white bg-gradient-to-r bg-black sticky top-0 left-0 right-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex justify-center items-center gap-3">
-          <img src={img} alt="logo" className="h-14 w-14 rounded-full" />
-            <Link
-              to="/"
-              className=" font-bold text-2xl"
-            >
-            <span className="text-lime-500 text-4xl">G</span>lobal<span className="text-lime-500 text-4xl">S</span>peak
-                 
+            <img src={img} alt="logo" className="h-14 w-14 rounded-full" />
+            <Link to="/" className=" font-bold text-2xl">
+              <span className="text-lime-500 text-4xl">G</span>lobal
+              <span className="text-lime-500 text-4xl">S</span>peak
             </Link>
-            
           </div>
 
           <div className="mx-auto space-x-5 hidden md:flex font-semibold ">
-            <ActiveLink
-              to="/"
-              className="text-white  px-3 py-2"
-            >
+            <ActiveLink to="/" className="text-white  px-3 py-2">
               Home
             </ActiveLink>
             <ActiveLink
@@ -59,26 +64,36 @@ const Navbar = () => {
             </ActiveLink>
           </div>
 
-          <div className="hidden md:block font-semibold ">
+          <div className="hidden md:block font-semibold">
+          
             <div className="space-x-4">
-              {
-              user?
-              <div className="flex space-x-4 items-center">
-                {(user.email === 'ph@2023.com') ? <ActiveLink to='/admin/dashboard'>Dashboard</ActiveLink> : null}
-                {(user.email === 'juber@gmail.com') ? <ActiveLink to='/instructor/dashboard'>Dashboard</ActiveLink> : null}
-                {(user.email !=='juber@gmail.com' && user.email !=='ph@2023.com') ? <ActiveLink to='/student/dashboard'>Dashboard</ActiveLink> : null}
-                <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
-                <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
-              </div>
-              :
-              <div className="space-x-4">
+
+              {user ? (
+                <div className="flex space-x-4 items-center">
+                  {userRole === "Admin" ?
+                <ActiveLink to="/admin/dashboard">Dashboard</ActiveLink> : ""}
+              {userRole === "Instructor" ?
+                <ActiveLink to="/instructor/dashboard">Dashboard</ActiveLink> : ""}
+              {userRole === "Student" ?
+                <ActiveLink to="/student/dashboard">Dashboard</ActiveLink> : ""}
+              
+                  <p className="cursor-pointer" onClick={handleLogOut}>
+                    Logout
+                  </p>
+                  <img
+                    className=" h-12 w-12 rounded-full cursor-pointer"
+                    src={user?.photoURL}
+                    alt=""
+                    title={user?.displayName}
+                  />
+                </div>
+              ) : (
+                <div className="space-x-4">
                   <ActiveLink to="/register">Register</ActiveLink>
                   <ActiveLink to="/login">Login</ActiveLink>
-              </div> 
-            }
-
+                </div>
+              )}
             </div>
-            
           </div>
           <div className="md:hidden">
             <button
@@ -112,35 +127,38 @@ const Navbar = () => {
           >
             Home
           </ActiveLink>
-          <ActiveLink
-            to="/classes"
-            className="text-white block  px-3 py-2"
-          >
+          <ActiveLink to="/classes" className="text-white block  px-3 py-2">
             Classes
           </ActiveLink>
-          <ActiveLink
-            to="/instructors"
-            className="text-white block  px-3 py-2"
-          >
+          <ActiveLink to="/instructors" className="text-white block  px-3 py-2">
             Instructors
           </ActiveLink>
-          
-          {
-              user?
-              <div className="flex space-x-4 items-center">
-                {(user.email === 'ph@2023.com') ? <ActiveLink to='/admin/dashboard'>Dashboard</ActiveLink> : null}
-                {(user.email === 'juber@gmail.com') ? <ActiveLink to='/instructor/dashboard'>Dashboard</ActiveLink> : null}
-                {(user.email !=='juber@gmail.com' && user.email !=='ph@2023.com') ? <ActiveLink to='/student/dashboard'>Dashboard</ActiveLink> : null}
-                <p className="cursor-pointer" onClick={handleLogOut}>Logout</p>
-                <img className=" h-12 w-12 rounded-full cursor-pointer" src={user?.photoURL} alt="" title={user?.displayName} />
-              </div>
-              :
-              <div className="space-x-4">
+
+          {user ? (
+                <div className="flex space-x-4 items-center">
+                  {userRole === "Admin" ?
+                <ActiveLink to="/admin/dashboard">Dashboard</ActiveLink> : ""}
+              {userRole === "Instructor" ?
+                <ActiveLink to="/instructor/dashboard">Dashboard</ActiveLink> : ""}
+              {userRole === "Student" ?
+                <ActiveLink to="/student/dashboard">Dashboard</ActiveLink> : ""}
+              
+                  <p className="cursor-pointer" onClick={handleLogOut}>
+                    Logout
+                  </p>
+                  <img
+                    className=" h-12 w-12 rounded-full cursor-pointer"
+                    src={user?.photoURL}
+                    alt=""
+                    title={user?.displayName}
+                  />
+                </div>
+              ) : (
+                <div className="space-x-4">
                   <ActiveLink to="/register">Register</ActiveLink>
                   <ActiveLink to="/login">Login</ActiveLink>
-              </div> 
-            }
-          
+                </div>
+              )}
         </div>
       </div>
     </nav>

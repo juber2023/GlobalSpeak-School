@@ -43,7 +43,7 @@ const router = createBrowserRouter([
       {
         path:'/instructors',
         element:<Instructors></Instructors>,
-        loader:()=>fetch('http://localhost:5000/instructors')
+        loader:()=>fetch('http://localhost:5000/users')
       },
       {
         path:'/classes',
@@ -60,7 +60,7 @@ const router = createBrowserRouter([
       {
         path:'/admin/dashboard',
         element:<PersonalRouter><AdminDashBoard></AdminDashBoard></PersonalRouter>,
-        loader:()=>fetch('http://localhost:5000/classes')
+        // loader:()=>fetch('http://localhost:5000/classes')
       },
       {
         path:'/instructor/dashboard',

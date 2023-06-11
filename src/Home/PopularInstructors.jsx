@@ -3,14 +3,15 @@ import { useEffect, useState } from "react";
 const PopularInstructors = () => {
   const [PI, SetPI] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/instructors")
+    fetch("http://localhost:5000/users")
       .then((res) => res.json())
       .then((data) => {
-        const topPI = data.slice(0, 6);
+        const instructors=data.filter(i=>i.role==='Instructor')
+        const topPI = instructors.slice(0, 6);
         SetPI(topPI);
       });
   }, []);
-  console.log(PI);
+  
 
   return (
     <div>
@@ -20,10 +21,10 @@ const PopularInstructors = () => {
       <div className="grid md:grid-cols-3 gap-5">
       {PI.map((p) => {
         return (
-          <div key={p._id} className="card  bg-base-100 shadow-xl h-[550px]">
+          <div key={p._id} className="card  bg-base-100 shadow-xl h-[550px] hover:scale-110 duration-150">
             <figure>
               <img
-                src={p.image}
+                src={p.photo}
                 alt="instructor"
                 className="w-full h-[400px]"
               />

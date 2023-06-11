@@ -37,7 +37,7 @@ const Banner = () => {
         >
           {images.map((image, index) => (
             <div key={index} className="w-full flex-shrink-0 relative max-h-screen">
-              <img src={image} alt={`Slide ${index + 1}`} className="w-full" />
+              <img src={image} alt={`Slide ${index + 1}`} className="w-full max-h-[calc(100vh-150px)]" />
               {index === currentImageIndex && (
                 <div
                   className={`absolute inset-0 flex flex-col justify-center items-center transition-opacity duration-500 ${

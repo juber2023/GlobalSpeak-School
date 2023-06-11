@@ -5,7 +5,11 @@ const Classes = () => {
   const classes = useLoaderData();
   console.log(classes);
   return (
-    <div className="grid md:grid-cols-3 gap-5 my-3">
+    <div>
+      <p className="text-4xl font-semibold text-center">All Classes</p>
+      <hr className="border-2 border-lime-500" />
+      <br />
+      <div className="grid md:grid-cols-3 gap-5 my-3">
       {classes.map((c) => {
         return (
           <div key={c._id} className="card h-[600px] glass">
@@ -28,6 +32,7 @@ const Classes = () => {
           </div>
         );
       })}
+    </div>
     </div>
   );
 };

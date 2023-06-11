@@ -147,7 +147,7 @@ const AdminDashboard = () => {
           {classList.map((classItem) => (
             <tr key={classItem._id} className=' border-y-4'>
               <td className="px-4 py-2">
-                <img src={classItem.image} alt={classItem.name} className="h-10" />
+                <img src={classItem.image} alt={classItem.name} className="h-20 w-30 " />
               </td>
               <td className="px-4 py-2">{classItem.name}</td>
               <td className="px-4 py-2">{classItem.instructor}</td>
