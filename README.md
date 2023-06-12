@@ -3,6 +3,6 @@
 * Online Registration and Payment: User-friendly system for direct registration and secure online payments for summer camp sessions and language classes.
 * User friendly: This website is designed for user friendly. I think User experience is very good. Please check it out. 
 * Dashboard: There are 3 separate dashboard for Admin, Instructor & students. No one can visit others dashboard.
-* Admin ID: phero@2023.com, Contact me to get admin password.
+* Admin ID: Contact me to get admin ID & password.
 ## Technology: React.js, firebase, mongoDB, Express.js, stripe payment
 * Live: https://assignment12-404e0.web.app/
