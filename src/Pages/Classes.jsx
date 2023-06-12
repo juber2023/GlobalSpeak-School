@@ -4,10 +4,12 @@ import { useLoaderData, useLocation, useNavigate } from "react-router-dom";
 import { UserContext } from "../Auth/ContextApi";
 import Swal from "sweetalert2";
 import ClassesCard from "./classesCard";
+import useTitle from "../Hooks/Usetitle";
 
 const Classes = () => {
   const classes = useLoaderData();
   const approvedClasses=classes.filter(c=>c.type==='Approved')
+  useTitle('Classes')
 
   // disabled button 
   const { user} = useContext(UserContext);
@@ -15,7 +17,7 @@ const Classes = () => {
 
   const [allUsers, SetAllUsers] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://server-12-foreign-langauage.vercel.app/users")
       .then((res) => res.json())
       .then((data) => {
         SetAllUsers(data);

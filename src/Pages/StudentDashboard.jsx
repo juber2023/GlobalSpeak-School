@@ -3,12 +3,14 @@ import { useState } from "react";
 import { Link, useLoaderData } from "react-router-dom";
 import { UserContext } from "../Auth/ContextApi";
 import { FaTrashAlt } from "react-icons/fa";
+import { MdOutlineDoneOutline } from "react-icons/Md";
 import Swal from "sweetalert2";
-import { useEffect } from "react";
+import useTitle from "../Hooks/Usetitle";
 
 const StudentDashboard = () => {
   const [activeItem, setActiveItem] = useState("item1");
   const { user } = useContext(UserContext);
+  useTitle("Dashboard")
 
   const handleItemClick = (itemName) => {
     setActiveItem(itemName);
@@ -33,7 +35,7 @@ const StudentDashboard = () => {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        fetch(`http://localhost:5000/enroll/${item._id}`, {
+        fetch(`https://server-12-foreign-langauage.vercel.app/enroll/${item._id}`, {
           method: "DELETE",
         })
           .then((res) => res.json())
@@ -136,8 +138,9 @@ const StudentDashboard = () => {
                     <div className="card-body">
                       <h2 className="card-title">{e.name}</h2>
                       <p>Instructor: {e.instructor}</p>
-                      <div className="card-actions justify-end">
-                        <button className="text-xl font-semibold">Successfully Paid</button>
+                      <div className="card-actions justify-end items-center text-lime-500">
+                      <MdOutlineDoneOutline className=" text-xl"></MdOutlineDoneOutline>
+                        <button className="text-xl font-semibold"> Successfully Paid</button>
                       </div>
                     </div>
                   </div>

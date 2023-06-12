@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const PopularClasses = () => {
   const [PC, SetPC] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/classes")
+    fetch("https://server-12-foreign-langauage.vercel.app/classes")
       .then((res) => res.json())
       .then((data) => {
         const approvedClasses=data.filter(c=>c.type==='Approved')

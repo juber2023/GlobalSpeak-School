@@ -4,6 +4,7 @@ import axios from 'axios';
 import { useRef } from 'react';
 import { useEffect } from 'react';
 import { useState } from 'react';
+import useTitle from '../Hooks/Usetitle';
 
 const AdminDashboard = () => {
   const [activeItem, setActiveItem] = useState('item1');
@@ -11,6 +12,7 @@ const AdminDashboard = () => {
   const handleItemClick = (itemName) => {
     setActiveItem(itemName);
   };
+  useTitle('Dashboard')
 
   // manage classes 
   const [classList, setClassList] = useState([]);
@@ -21,7 +23,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/classes');
+        const response = await axios.get('https://server-12-foreign-langauage.vercel.app/classes');
         setClassList(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -32,7 +34,7 @@ const AdminDashboard = () => {
   }, []);
   const handleApproveClick = async (classId) => {
     try {
-      await axios.put(`http://localhost:5000/classes/${classId}`, { type: 'Approved' });
+      await axios.put(`https://server-12-foreign-langauage.vercel.app/classes/${classId}`, { type: 'Approved' });
       const updatedClassList = classList.map((classItem) => {
         if (classItem._id === classId) {
           return { ...classItem, type: 'Approved' };
@@ -48,7 +50,7 @@ const AdminDashboard = () => {
 
   const handleDenyClick = async (classId) => {
     try {
-      await axios.put(`http://localhost:5000/classes/${classId}`, { type: 'Denied' });
+      await axios.put(`https://server-12-foreign-langauage.vercel.app/classes/${classId}`, { type: 'Denied' });
       const updatedClassList = classList.map((classItem) => {
         if (classItem._id === classId) {
           return { ...classItem, type: 'Denied' };
@@ -106,7 +108,7 @@ const AdminDashboard = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/users');
+        const response = await axios.get('https://server-12-foreign-langauage.vercel.app/users');
         SetUserList(response.data);
       } catch (error) {
         console.error('Error fetching data:', error);
@@ -118,7 +120,7 @@ const AdminDashboard = () => {
 
   const handleAdminClick = async (classId) => {
     try {
-      await axios.put(`http://localhost:5000/users/${classId}`, { role: 'Admin' });
+      await axios.put(`https://server-12-foreign-langauage.vercel.app/users/${classId}`, { role: 'Admin' });
       const updatedClassList = userList.map((classItem) => {
         if (classItem._id === classId) {
           return { ...classItem, role: 'Admin' };
@@ -132,7 +134,7 @@ const AdminDashboard = () => {
   };
   const handleInstructorClick = async (classId) => {
     try {
-      await axios.put(`http://localhost:5000/users/${classId}`, { role: 'Instructor' });
+      await axios.put(`https://server-12-foreign-langauage.vercel.app/users/${classId}`, { role: 'Instructor' });
       const updatedClassList = userList.map((classItem) => {
         if (classItem._id === classId) {
           return { ...classItem, role: 'Instructor' };

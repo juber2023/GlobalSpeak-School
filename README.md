@@ -1,8 +1,8 @@
 ## Summer Camp/ Foreign Language training centre
-* Comprehensive Program Listings: Detailed info on summer camp and language training programs, including descriptions, age groups, dates, duration, and pricing options.
+* Multi-users: Admin can approve or deny any class, make student as instructor or admin. An instructor can add class in his/her dashboard. Student can select any class & enroll those classes.
 * Online Registration and Payment: User-friendly system for direct registration and secure online payments for summer camp sessions and language classes.
 * Multilingual Support: Website supports multiple languages, allowing visitors to navigate and access content in their preferred language.
-* Interactive Curriculum Overview: Engaging overview of language training curriculum with levels, methods, objectives, and interactive elements like videos and quizzes.
-* Testimonials and Success Stories: Showcase success stories and testimonials from past participants, highlighting their experiences, achievements, and acquired skills to build trust and attract new customers.
+* User friendly: This website is designed for user friendly. I think User experience is very good. Please check it out. 
+* Dashboard: There are 3 separate dashboard for Admin, Instructor & students. No one can visit others dashboard.
 ## Technology: React.js, firebase, mongoDB, Express.js, stripe payment
-* Live:
+* Live: https://assignment12-404e0.web.app/

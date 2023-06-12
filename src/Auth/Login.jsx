@@ -72,7 +72,7 @@ const Login = () => {
         role: "Student",
         photo: loggedInUser.photoURL,
       };
-      fetch("http://localhost:5000/users", {
+      fetch("https://server-12-foreign-langauage.vercel.app/users", {
         method: "POST",
         headers: {
           "content-type": "application/json",

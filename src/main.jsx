@@ -43,12 +43,12 @@ const router = createBrowserRouter([
       {
         path:'/instructors',
         element:<Instructors></Instructors>,
-        loader:()=>fetch('http://localhost:5000/users')
+        loader:()=>fetch('https://server-12-foreign-langauage.vercel.app/users')
       },
       {
         path:'/classes',
         element:<Classes></Classes>,
-        loader:()=>fetch('http://localhost:5000/classes')
+        loader:()=>fetch('https://server-12-foreign-langauage.vercel.app/classes')
       },
     ]
   },
@@ -60,21 +60,22 @@ const router = createBrowserRouter([
       {
         path:'/admin/dashboard',
         element:<PersonalRouter><AdminDashBoard></AdminDashBoard></PersonalRouter>,
-        // loader:()=>fetch('http://localhost:5000/classes')
+        // loader:()=>fetch('https://server-12-foreign-langauage.vercel.app/classes')
       },
       {
         path:'/instructor/dashboard',
-        element:<PersonalRouter><InstructorDashboard></InstructorDashboard></PersonalRouter>
+        element:<PersonalRouter><InstructorDashboard></InstructorDashboard></PersonalRouter>,
+        loader:()=>fetch('https://server-12-foreign-langauage.vercel.app/classes')
       },
       {
         path:'/student/dashboard',
         element:<PersonalRouter><StudentDashboard></StudentDashboard></PersonalRouter>,
-        loader:()=>fetch('http://localhost:5000/enroll')
+        loader:()=>fetch('https://server-12-foreign-langauage.vercel.app/enroll')
       },
       {
         path: '/payment/:id',
         element: <div className='w-2/6 mx-auto mt-10'><Payment></Payment></div>,
-        loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
+        loader:({params})=>fetch(`https://server-12-foreign-langauage.vercel.app/payment/${params.id}`)
       }
     ]
   }

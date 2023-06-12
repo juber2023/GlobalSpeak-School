@@ -17,7 +17,7 @@ const Navbar = () => {
   // dashboard
   const [allUsers, SetAllUsers] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://server-12-foreign-langauage.vercel.app/users")
       .then((res) => res.json())
       .then((data) => {
         SetAllUsers(data);

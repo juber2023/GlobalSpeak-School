@@ -1,9 +1,11 @@
 import { useLoaderData } from "react-router-dom";
+import useTitle from "../Hooks/Usetitle";
 
 const Instructors = () => {
   const users = useLoaderData();
   const instructor=users.filter(i=>i.role==='Instructor')
   console.log(instructor);
+  useTitle('Instructors')
   return (
     <div>
       <p className="text-4xl font-semibold text-center">All Instructors</p>

@@ -2,12 +2,14 @@ import { Elements } from "@stripe/react-stripe-js";
 import CheckoutPayment from "./CheckoutPayment";
 import { useLoaderData, useParams } from "react-router-dom";
 import { loadStripe } from "@stripe/stripe-js";
+import useTitle from "../Hooks/Usetitle";
 
 const stripePromise = loadStripe(import.meta.env.VITE_pk_stripe);
 const Payment = () => {
     const selectedClass=useLoaderData()
     const {_id}=selectedClass
     console.log(_id);
+    useTitle('Payment')
 
     return (
         <div >

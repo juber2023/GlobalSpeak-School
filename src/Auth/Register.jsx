@@ -27,7 +27,7 @@ const Register = () => {
             updateProfile(loggedUser,{ displayName:data.name, photoURL:data.photoURL})
             .then(() => {
               const saveUser = { name: data.name, email: data.email , photo:data.photoURL, role:'Student' }
-              fetch('http://localhost:5000/users', {
+              fetch('https://server-12-foreign-langauage.vercel.app/users', {
                   method: 'POST',
                   headers: {
                       'content-type': 'application/json'
@@ -67,7 +67,7 @@ const Register = () => {
           role: "Student",
           photo: loggedInUser.photoURL,
         };
-        fetch("http://localhost:5000/users", {
+        fetch("https://server-12-foreign-langauage.vercel.app/users", {
           method: "POST",
           headers: {
             "content-type": "application/json",

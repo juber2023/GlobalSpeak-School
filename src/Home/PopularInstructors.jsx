@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 const PopularInstructors = () => {
   const [PI, SetPI] = useState([]);
   useEffect(() => {
-    fetch("http://localhost:5000/users")
+    fetch("https://server-12-foreign-langauage.vercel.app/users")
       .then((res) => res.json())
       .then((data) => {
         const instructors=data.filter(i=>i.role==='Instructor')

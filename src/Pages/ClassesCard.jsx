@@ -17,7 +17,7 @@ const ClassesCard = ({ item, userRole, user }) => {
         price,
         email: user.email,
       };
-      fetch("http://localhost:5000/enroll", {
+      fetch("https://server-12-foreign-langauage.vercel.app/enroll", {
         method: "POST",
         headers: {
           "content-type": "application/json",
