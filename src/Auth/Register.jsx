@@ -86,6 +86,9 @@ const Register = () => {
             else if(newPath === "/instructor/dashboard"){
                 newPath='/'
             }
+            else if(newPath === "/payment"){
+                newPath='/'
+            }
             
             navigate(newPath, { replace: true })
             if (newPath === "/") {

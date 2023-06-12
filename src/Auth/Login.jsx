@@ -35,6 +35,9 @@ const Login = () => {
         else if(newPath === "/instructor/dashboard"){
             newPath='/'
         }
+        else if(newPath === "/payment"){
+            newPath='/'
+        }
         
         navigate(newPath, { replace: true })
         if (newPath === "/") {
@@ -86,6 +89,9 @@ const Login = () => {
               newPath='/'
           }
           else if(newPath === "/instructor/dashboard"){
+              newPath='/'
+          }
+          else if(newPath === "/payment"){
               newPath='/'
           }
           

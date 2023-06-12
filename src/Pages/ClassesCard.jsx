@@ -10,8 +10,9 @@ const ClassesCard = ({ item, userRole, user }) => {
     if (user && user.email) {
       const selectItem = {
         selectItemId: _id,
-        name,
+        name: name,
         image,
+        instructor,
         availableSeats,
         price,
         email: user.email,
@@ -27,9 +28,9 @@ const ClassesCard = ({ item, userRole, user }) => {
         .then((data) => {
           if (data.insertedId) {
             Swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
-              title: "Food added on the cart.",
+              title: "Class Selected",
               showConfirmButton: false,
               timer: 1500,
             });
@@ -57,7 +58,7 @@ const ClassesCard = ({ item, userRole, user }) => {
           <img src={image} alt="class" className="w-full h-full" />
         </figure>
         <div className="card-body">
-          <h2 className="card-title">Name: {name}</h2>
+          <h2 className="card-title">{name}</h2>
           <p>Instructor: {instructor}</p>
           <p>Available Seats: {availableSeats}</p>
           <p>Price: ${price}</p>

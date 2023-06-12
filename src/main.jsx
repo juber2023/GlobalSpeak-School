@@ -18,8 +18,8 @@ import InstructorDashboard from './Pages/InstructorDashboard';
 import StudentDashboard from './Pages/StudentDashboard';
 import PersonalRouter from './Auth/PersonalRouter';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import AdminDashboard from './Pages/AdminDashBoard';
 import DashboardLayout from './Layout/DashboardLayout';
+import Payment from './Pages/Payment';
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
@@ -68,8 +68,14 @@ const router = createBrowserRouter([
       },
       {
         path:'/student/dashboard',
-        element:<PersonalRouter><StudentDashboard></StudentDashboard></PersonalRouter>
+        element:<PersonalRouter><StudentDashboard></StudentDashboard></PersonalRouter>,
+        loader:()=>fetch('http://localhost:5000/enroll')
       },
+      {
+        path: '/payment/:id',
+        element: <div className='w-2/6 mx-auto mt-10'><Payment></Payment></div>,
+        loader:({params})=>fetch(`http://localhost:5000/payment/${params.id}`)
+      }
     ]
   }
 
