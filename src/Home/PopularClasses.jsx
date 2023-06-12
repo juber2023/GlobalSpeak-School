@@ -6,7 +6,8 @@ const PopularClasses = () => {
     fetch("http://localhost:5000/classes")
       .then((res) => res.json())
       .then((data) => {
-        const topPC = data.slice(0, 6);
+        const approvedClasses=data.filter(c=>c.type==='Approved')
+        const topPC = approvedClasses.slice(0, 6);
         SetPC(topPC);
       });
   }, []);

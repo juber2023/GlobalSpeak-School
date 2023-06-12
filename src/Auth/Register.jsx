@@ -46,6 +46,7 @@ const Register = () => {
                               timer: 1500
                           });
                           navigate('/');
+                          window.location.reload()
                       }
                   })
 
@@ -57,24 +58,42 @@ const Register = () => {
     }
 
     const handleGoogle = () => {
-        googleLogIn()
-        .then(result => {
-          const loggedInUser = result.user;
-          console.log(loggedInUser);
-          const saveUser = { name: loggedInUser.displayName, email: loggedInUser.email, role:'Student', photo:loggedInUser.photoURL }
-          fetch('http://localhost:5000/users', {
-              method: 'POST',
-              headers: {
-                  'content-type': 'application/json'
-              },
-              body: JSON.stringify(saveUser)
-          })
-              .then(res => res.json())
-              .then(() => {
-                  navigate(from, { replace: true });
-              })
+      googleLogIn().then((result) => {
+        const loggedInUser = result.user;
+        console.log(loggedInUser);
+        const saveUser = {
+          name: loggedInUser.displayName,
+          email: loggedInUser.email,
+          role: "Student",
+          photo: loggedInUser.photoURL,
+        };
+        fetch("http://localhost:5000/users", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify(saveUser),
+        })
+          .then((res) => res.json())
+          .then(() => {
+            let newPath = from;
+            if (newPath === "/admin/dashboard") {
+              newPath = "/";
+            }
+            else if(newPath === "/student/dashboard"){
+                newPath='/'
+            }
+            else if(newPath === "/instructor/dashboard"){
+                newPath='/'
+            }
+            
+            navigate(newPath, { replace: true })
+            if (newPath === "/") {
+              window.location.reload();
+            }
+          });
       });
-      };
+    };
     return (
 <div className="">
           

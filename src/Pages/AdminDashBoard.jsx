@@ -101,10 +101,54 @@ const AdminDashboard = () => {
     });
   }, []);
 
+  // manage users element 
+  const [userList, SetUserList]=useState([])
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('http://localhost:5000/users');
+        SetUserList(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  const handleAdminClick = async (classId) => {
+    try {
+      await axios.put(`http://localhost:5000/users/${classId}`, { role: 'Admin' });
+      const updatedClassList = userList.map((classItem) => {
+        if (classItem._id === classId) {
+          return { ...classItem, role: 'Admin' };
+        }
+        return classItem;
+      });
+      SetUserList(updatedClassList);
+    } catch (error) {
+      console.error('Error updating class status:', error);
+    }
+  };
+  const handleInstructorClick = async (classId) => {
+    try {
+      await axios.put(`http://localhost:5000/users/${classId}`, { role: 'Instructor' });
+      const updatedClassList = userList.map((classItem) => {
+        if (classItem._id === classId) {
+          return { ...classItem, role: 'Instructor' };
+        }
+        return classItem;
+      });
+      SetUserList(updatedClassList);
+    } catch (error) {
+      console.error('Error updating class status:', error);
+    }
+  };
+
   return (
     <div className="flex">
       <div className="w-1/6 bg-gray-200 min-h-[calc(100vh-305px)] ">
-        <ul className="py-20">
+        <ul className="py-20 sticky top-0 z-50">
           <li
             className={` py-2 md:pl-10 cursor-pointer ${
               activeItem === 'item1' ? 'bg-lime-500 text-white' : ''
@@ -127,11 +171,11 @@ const AdminDashboard = () => {
           
         </ul>
       </div>
-      <div className="w-3/4 bg-white p-4">
+      <div className="w-3/4 bg-white border-r-4">
         {/* classes table  */}
         {activeItem === 'item1' && 
         <table ref={tableRef} className="w-full table-auto">
-        <thead>
+        <thead className='sticky top-16 z-50 bg-slate-300'>
           <tr>
             <th className="px-4 py-2">Photo</th>
             <th className="px-4 py-2">Class Name</th>
@@ -145,7 +189,7 @@ const AdminDashboard = () => {
         </thead>
         <tbody className='text-center'>
           {classList.map((classItem) => (
-            <tr key={classItem._id} className=' border-y-4'>
+            <tr key={classItem._id} className=' border-y-4 border-t-0'>
               <td className="px-4 py-2">
                 <img src={classItem.image} alt={classItem.name} className="h-20 w-30 " />
               </td>
@@ -172,7 +216,7 @@ const AdminDashboard = () => {
                 </button>
                 <button
                   onClick={() => handleFeedbackClick(classItem._id)}
-                  className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-800"
+                  className="bg-lime-500 text-white px-4 py-2 rounded hover:bg-lime-800"
                 >
                   Send Feedback
                 </button>
@@ -196,7 +240,7 @@ const AdminDashboard = () => {
             <div className="flex justify-end mt-4">
               <button
                 onClick={handleSendFeedback}
-                className="bg-blue-500 text-white px-4 py-2 rounded mr-2"
+                className="bg-lime-500 text-white px-4 py-2 rounded mr-2"
               >
                 Send
               </button>
@@ -210,7 +254,49 @@ const AdminDashboard = () => {
           </div>
         </div>
       )}
-        {activeItem === 'item2' && <h1>Content for Item 2</h1>}
+        {/* Manage users  */}
+        {activeItem === 'item2' && 
+        <table ref={tableRef} className="w-full table-auto">
+        <thead className='sticky top-16 z-50 bg-slate-300'>
+          <tr>
+            <th className="px-4 py-2">Photo</th>
+            <th className="px-4 py-2">Name</th>
+            <th className="px-4 py-2">Email</th>
+            <th className="px-4 py-2">Role</th>
+            <th className="px-4 py-2">Actions</th>
+          </tr>
+        </thead>
+        <tbody className='text-center'>
+          {userList.map((classItem) => (
+            <tr key={classItem._id} className=' border-y-4 border-t-0'>
+              <td className="px-4 py-2">
+                <img src={classItem.photo} alt={classItem.name} className="h-20 w-20 rounded-full" />
+              </td>
+              <td className="px-4 py-2">{classItem.name}</td>
+              <td className="px-4 py-2">{classItem.email}</td>
+              <td className={`px-4 py-2 ${classItem.role==="Student" && "font-semibold"} ${classItem.role==="Admin" && "text-green-500 font-semibold"} ${classItem.role==="Instructor" && " font-semibold text-indigo-400"}`} >{classItem.role}</td>
+              <td className="px-4 py-2">
+                <button
+                  onClick={() => handleAdminClick(classItem._id)}
+                  disabled={classItem.role === 'Admin' || classItem.role === 'Instructor'}
+                  className="mr-2 bg-green-500 text-white px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-green-800"
+                >
+                  Make Admin
+                </button>
+                <button
+                  onClick={() => handleInstructorClick(classItem._id)}
+                  
+                  disabled={classItem.role === 'Admin' || classItem.role === 'Instructor'}
+                  className="mr-2 bg-indigo-500 text-white px-4 py-2 rounded disabled:bg-gray-400 disabled:cursor-not-allowed hover:bg-indigo-900"
+                >
+                  Make Instructor
+                </button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+        }
        
       </div>
     </div>
