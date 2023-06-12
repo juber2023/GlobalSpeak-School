@@ -45,6 +45,7 @@ const InstructorDashboard = () => {
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
+          window.location.reload();
           Swal.fire({
             position: "center",
             icon: "success",
